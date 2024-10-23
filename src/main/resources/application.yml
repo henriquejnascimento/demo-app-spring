@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: demo-app-spring
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/DEMO_APP_SPRING
+    username: DEMO_SCHEMA
+    password: DEMO_SCHEMA
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.OracleDialect
+        show_sql: true
+        format_sql: true
+  output:
+    ansi:
+      enabled: always
