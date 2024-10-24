@@ -1,4 +1,4 @@
-# Demo application with Spring Boot
+# Demo application with Java 21 and Spring Framework
 
 ### How execute
 
