@@ -79,6 +79,10 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
+      <td>Spring Profiles</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
       <td>SpEL (Spring Expression Language)</td>
       <td><span class="done">✅ Done</span></td>
     </tr>
