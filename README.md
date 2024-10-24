@@ -87,6 +87,10 @@
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
+      <td>2FA Google Authenticator</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
       <td>RabbitMQ</td>
       <td>❌ Not Started</td>
     </tr>
