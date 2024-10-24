@@ -156,7 +156,7 @@
     </tr>
     <tr>
       <td>axion-release-plugin</td>
-      <td>Not Started</td>
+      <td>❌ Not Started</td>
     </tr>
   </tbody>
 </table>
