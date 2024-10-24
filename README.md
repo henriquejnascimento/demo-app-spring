@@ -42,13 +42,6 @@
 
 ### Features implemented
 
-<style>
-    .done {
-        color: green;
-        font-weight: bold;
-    }
-</style>
-
 <table>
   <thead>
     <tr>
@@ -160,6 +153,10 @@
     <tr>
       <td>Rest Assured</td>
       <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>axion-release-plugin</td>
+      <td>Not Started</td>
     </tr>
   </tbody>
 </table>
