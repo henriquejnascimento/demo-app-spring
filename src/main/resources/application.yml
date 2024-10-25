@@ -8,12 +8,11 @@ logging:
     org.hibernate.type: TRACE
 
 spring:
+  profiles:
+    active: dev
   application:
     name: demo-app-spring
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521/DEV_DEMO_APP_SPRING
-    username: DEV_DEMO
-    password: DEV_DEMO
     driver-class-name: oracle.jdbc.OracleDriver
     hikari:
       schema: DEV_DEMO
@@ -37,3 +36,9 @@ spring:
   output:
     ansi:
       enabled: always
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html

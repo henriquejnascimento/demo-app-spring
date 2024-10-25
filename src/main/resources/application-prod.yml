@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/PROD_DEMO_APP_SPRING
+    username: PROD_DEMO
+    password: PROD_DEMO
+
+management:
+  info:
+    java.enabled: true
+    os.enabled: true
+    process.enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    env:
+      show-values: when-authorized
+    health:
+      probes:
+        enabled: true
+      show-details: when-authorized
+    metrics:
+      enabled: true

@@ -84,7 +84,7 @@
     </tr>
     <tr>
       <td>Spring Profiles</td>
-      <td>❌ Not Started</td>
+      <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
       <td>Spring Boot internationalization i18n</td>
