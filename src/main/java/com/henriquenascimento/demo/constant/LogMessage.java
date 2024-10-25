@@ -9,7 +9,7 @@ public class LogMessage {
     public static final String CREATE = "Creating %s with request: %s";
     public static final String FIND_BY_ID_OR_ELSE_THROW = "Searching for %s with id: %d";
     public static final String FIND_RESPONSEDTO_BY_ID = "Searching for %sResponseDTO with id: %d";
-    public static final String FIND_ALL = "Retrieving all records with pagination %s of entity: %s";
+    public static final String FIND_ALL = "Retrieving all records with page %s, size: %s, sort: %s of entity: %s";
     public static final String UPDATE_BY_ID = "Updating %s with id: %d";
     public static final String DELETE_BY_ID = "Deleting %s with id: %d";
     public static final String DELETE_ALL = "Deleting all records of entity: %s";
@@ -29,9 +29,11 @@ public class LogMessage {
         return String.format(FIND_RESPONSEDTO_BY_ID, entityName, id);
     }
 
-    public static String buildFindAllLogMessage(final Object pageable,
+    public static String buildFindAllLogMessage(final int page,
+                                                final int size,
+                                                final String sort,
                                                 final String entityName) {
-        return String.format(FIND_ALL, pageable, entityName);
+        return String.format(FIND_ALL, page, size, sort, entityName);
     }
 
     public static String buildDeleteById(final String entityName,

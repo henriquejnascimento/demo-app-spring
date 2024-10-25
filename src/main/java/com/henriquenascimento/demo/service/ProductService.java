@@ -15,7 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,9 +44,11 @@ public class ProductService {
     }
 
     // TODO add ProductFilterDTO param
-    public Page<ProductResponseDTO> findAll(final Pageable pageable) {
-        log.info(LogMessage.buildFindAllLogMessage(pageable, productRepository.getEntityName()));
-        return productRepository.findAll(pageable)
+    public Page<ProductResponseDTO> findAll(final int page,
+                                            final int size,
+                                            final String[] sort) {
+        log.info(LogMessage.buildFindAllLogMessage(page, size, String.join(",", sort), productRepository.getEntityName()));
+        return productRepository.findAll(PageRequest.of(page, size, Sort.Direction.fromString(sort[1]), sort[0]))
                 .map(productResponseMapper::toDTO);
     }
 

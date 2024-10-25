@@ -5,13 +5,14 @@ import com.henriquenascimento.demo.dto.ProductResponseDTO;
 import com.henriquenascimento.demo.enumerator.ProductStatus;
 import com.henriquenascimento.demo.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +37,33 @@ public class ProductController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all products", description = "Get a list of all products in the inventory")
-    public ResponseEntity<Page<ProductResponseDTO>> findAll(final Pageable pageable) {
-        return ResponseEntity.ok(productService.findAll(pageable));
+    @Operation(
+            summary = "Get all products",
+            description = "Get a list of all products in the inventory",
+            parameters = {
+                    @Parameter(
+                            name = "page",
+                            description = "Page number (starting from 0). Default is 0.",
+                            example = "0"
+                    ),
+                    @Parameter(
+                            name = "size",
+                            description = "Number of products per page. Default is 10.",
+                            example = "10"
+                    ),
+                    @Parameter(
+                            name = "sort",
+                            description = "Sorting criteria in the format: property(,asc|desc). Default is 'id,asc'.",
+                            example = "id,asc",
+                            schema = @Schema(type = "string", defaultValue = "id,asc")
+                    )
+            }
+    )
+    public ResponseEntity<Page<ProductResponseDTO>> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id,asc") String[] sort) {
+        return ResponseEntity.ok(productService.findAll(page, size, sort));
     }
 
     @GetMapping("/{id}")
