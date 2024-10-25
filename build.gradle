@@ -23,6 +23,7 @@ ext {
 	ojdbcVersion = '23.5.0.24.07'
 	hibernateVersion = '6.4.10.Final'
 	springDocVersion = '2.6.0'
+	lombokVersion = '1.18.34'
 }
 
 dependencies {
@@ -36,7 +37,7 @@ dependencies {
 	// DATABASES
 	implementation "org.hibernate.orm:hibernate-core:${hibernateVersion}"
 	implementation "org.hibernate.orm:hibernate-envers:${hibernateVersion}"
-	runtimeOnly "com.oracle.database.jdbc:ojdbc11:${ojdbcVersion}"
+	implementation "com.oracle.database.jdbc:ojdbc11:${ojdbcVersion}"
 
 	implementation "org.flywaydb:flyway-core:${flywayVersion}"
 	runtimeOnly("org.flywaydb:flyway-database-oracle:${flywayVersion}")
@@ -44,16 +45,16 @@ dependencies {
 
 	testImplementation "org.springframework.boot:spring-boot-starter-test"
 
-	compileOnly "org.projectlombok:lombok:1.18.34"
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
 
-	testCompileOnly "org.projectlombok:lombok:1.18.34"
+	testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
 
 	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
 
-	annotationProcessor "org.projectlombok:lombok:1.18.34"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
-	testAnnotationProcessor "org.projectlombok:lombok:1.18.34"
+	testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
