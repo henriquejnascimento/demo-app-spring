@@ -5,6 +5,7 @@
 1. git clone https://github.com/henriquejnascimento/demo-app-spring.git
 2. cd demo-app-spring/development/docker/
 3. docker compose up
+4. cd ../.. && ./gradlew bootRun
 
 ### Entity Relationship (ER) Diagram
 
