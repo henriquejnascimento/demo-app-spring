@@ -6,9 +6,9 @@ services:
     container_name: demo-application-spring-oracle
     environment:
       ORACLE_PASSWORD: root
-      ORACLE_DATABASE: DEMO_APP_SPRING
-      APP_USER: DEMO_SCHEMA
-      APP_USER_PASSWORD: DEMO_SCHEMA
+      ORACLE_DATABASE: DEV_DEMO_APP_SPRING
+      APP_USER: DEV_DEMO
+      APP_USER_PASSWORD: DEV_DEMO
       ORACLE_CHARACTERSET: AL32UTF8
     ports:    
       - 1521:1521

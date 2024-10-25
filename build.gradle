@@ -19,8 +19,8 @@ repositories {
 
 ext {
 	mapstructVersion = "1.6.0"
-	flywayVersion = '10.11.1'
-	ojdbcVersion = '23.3.0.23.09'
+	flywayVersion = '10.20.0'
+	ojdbcVersion = '23.5.0.24.07'
 	hibernateVersion = '6.4.10.Final'
 	springDocVersion = '2.6.0'
 }
@@ -38,8 +38,9 @@ dependencies {
 	implementation "org.hibernate.orm:hibernate-envers:${hibernateVersion}"
 	runtimeOnly "com.oracle.database.jdbc:ojdbc11:${ojdbcVersion}"
 
-//	implementation "org.flywaydb:flyway-core:${flywayVersion}"
-//	implementation "org.flywaydb:flyway-database-oracle:${flywayVersion}"
+	implementation "org.flywaydb:flyway-core:${flywayVersion}"
+	runtimeOnly("org.flywaydb:flyway-database-oracle:${flywayVersion}")
+
 
 	testImplementation "org.springframework.boot:spring-boot-starter-test"
 

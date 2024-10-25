@@ -1,11 +1,19 @@
+logging:
+  level:
+    org.flywaydb.core: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
+
 spring:
   application:
     name: demo-app-spring
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521/DEMO_APP_SPRING
-    username: DEMO_SCHEMA
-    password: DEMO_SCHEMA
+    url: jdbc:oracle:thin:@localhost:1521/DEV_DEMO_APP_SPRING
+    username: DEV_DEMO
+    password: DEV_DEMO
     driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      schema: DEV_DEMO
   jpa:
     hibernate:
       ddl-auto: validate
@@ -14,6 +22,15 @@ spring:
         dialect: org.hibernate.dialect.OracleDialect
         show_sql: true
         format_sql: true
+  flyway:
+    enabled: true
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:/db/migration/oracle
+    baseline-on-migrate: true
+    schemas:
+      - DEV_DEMO
   output:
     ansi:
       enabled: always
