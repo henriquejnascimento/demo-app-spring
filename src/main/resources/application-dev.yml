@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/DEV_DEMO_APP_SPRING
+    username: DEV_DEMO
+    password: DEV_DEMO
+
+management:
+  info:
+    java.enabled: true
+    os.enabled: true
+    process.enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    env:
+      show-values: always
+    health:
+      probes:
+        enabled: true
+      show-details: always
+    metrics:
+      enabled: true
