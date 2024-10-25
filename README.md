@@ -63,6 +63,10 @@
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
+      <td>Spring Data JPA</td>
+      <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
       <td>Spring Boot Cache</td>
       <td>❌ Not Started</td>
     </tr>
@@ -83,11 +87,19 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
+      <td>Spring Boot internationalization i18n</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
       <td>SpEL (Spring Expression Language)</td>
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
       <td>2FA Google Authenticator</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>Google Sign-In</td>
       <td>❌ Not Started</td>
     </tr>
     <tr>
@@ -128,7 +140,7 @@
     </tr>
     <tr>
       <td>Flyway</td>
-      <td>⏳ In Progress</td>
+      <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
       <td>AWS integration</td>
@@ -151,7 +163,11 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
-      <td>JUnit</td>
+      <td>JUnit - Unit Test</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>JUnit - Integration Test</td>
       <td>❌ Not Started</td>
     </tr>
     <tr>
