@@ -35,7 +35,7 @@
     </tr>
     <tr>
       <td>RabbitMQ Management</td>
-      <td></td>
+      <td>❌ Not Started</td>
     </tr>
   </tbody>
 </table>
