@@ -11,6 +11,10 @@
 
 ❌ Not Started
 
+### Requirements
+
+ - Java 21
+ - Docker
 
 ### Links
 
