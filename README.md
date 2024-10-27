@@ -148,11 +148,35 @@
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
-      <td>AWS integration</td>
+      <td>AWS EC2</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>AWS RDS</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>AWS SQS</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>AWS S3</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>LocalStack (AWS)</td>
       <td>❌ Not Started</td>
     </tr>
     <tr>
       <td>Terraform</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>SFTP Upload</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>SFTP Download</td>
       <td>❌ Not Started</td>
     </tr>
     <tr>
@@ -161,6 +185,10 @@
     </tr>
     <tr>
       <td>Generate PDF and CSV files</td>
+      <td>❌ Not Started</td>
+    </tr>
+    <tr>
+      <td>SonarQube</td>
       <td>❌ Not Started</td>
     </tr>
     <tr>
@@ -184,8 +212,8 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
-      <td>axion-release-plugin</td>
-      <td>❌ Not Started</td>
+      <td>Axion Release Plugin</td>
+      <td><span class="done">✅ Done</span></td>
     </tr>
   </tbody>
 </table>

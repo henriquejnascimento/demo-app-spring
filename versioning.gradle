@@ -1,0 +1,57 @@
+ext {
+    versionParts = project.version.toString().split('\\.')
+}
+
+def updateVersion(int major, int minor, int patch) {
+    return "${major}.${minor}.${patch}"
+}
+
+def updateVersionInBuildFile(String newVersion) {
+    def buildFile = file("${project.projectDir}/build.gradle")
+    def content = buildFile.text
+
+    content = content.replaceAll(/version\s*=\s*['"]([^'"]+)['"]/,'version = "' + newVersion + '"')
+    buildFile.text = content
+}
+
+task incrementMajor {
+    group = "Versioning"
+    description = "Increments the major version number"
+    doLast {
+        int major = versionParts[0].toInteger() + 1
+        int minor = 0
+        int patch = 0
+        project.version = updateVersion(major, minor, patch)
+
+        updateVersionInBuildFile(project.version)
+        println("Nova versão (Major): ${project.version}")
+    }
+}
+
+task incrementMinor {
+    group = "Versioning"
+    description = "Increments the minor version number"
+    doLast {
+        int major = versionParts[0].toInteger()
+        int minor = versionParts[1].toInteger() + 1
+        int patch = 0
+        project.version = updateVersion(major, minor, patch)
+
+        updateVersionInBuildFile(project.version)
+        println("Nova versão (Minor): ${project.version}")
+    }
+}
+
+task incrementPatch {
+    group = "Versioning"
+    description = "Increments the patch version number"
+    doLast {
+        int major = versionParts[0].toInteger()
+        int minor = versionParts[1].toInteger()
+        int patch = versionParts[2].toInteger() + 1
+        project.version = updateVersion(major, minor, patch)
+
+        updateVersionInBuildFile(project.version)
+        println("Nova versão (Patch): ${project.version}")
+    }
+}
