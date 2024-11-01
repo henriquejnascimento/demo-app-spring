@@ -92,6 +92,10 @@
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
+      <td>Spring AOP</td>
+      <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
       <td>Spring Boot internationalization i18n</td>
       <td>❌ Not Started</td>
     </tr>
