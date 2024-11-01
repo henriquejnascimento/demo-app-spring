@@ -184,8 +184,8 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
-      <td>Upload file</td>
-      <td>⏳ In Progress</td>
+      <td>Manage files - Upload multiple files, download, list, get file info, rename and delete</td>
+      <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
       <td>Generate PDF and CSV files</td>

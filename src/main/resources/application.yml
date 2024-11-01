@@ -42,3 +42,9 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+demo-app-spring:
+  file:
+    upload:
+      enable: true
+      base-path: upload/
