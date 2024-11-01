@@ -32,7 +32,8 @@ public class ProductController {
             @ApiResponse(responseCode = "201", description = "Product created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid request")
     })
-    public ResponseEntity<ProductResponseDTO> create(@RequestBody @Valid ProductRequestDTO request) {
+    public ResponseEntity<ProductResponseDTO> create(
+            @RequestBody @Valid ProductRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(request));
     }
 
@@ -60,28 +61,31 @@ public class ProductController {
             }
     )
     public ResponseEntity<Page<ProductResponseDTO>> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id,asc") String[] sort) {
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "sort", defaultValue = "id,asc") String[] sort) {
         return ResponseEntity.ok(productService.findAll(page, size, sort));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a product by ID", description = "Get the details of a specific product by its unique ID")
-    public ResponseEntity<ProductResponseDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<ProductResponseDTO> findById(
+            @PathVariable Long id) {
         return ResponseEntity.ok(productService.findResponseDTOById(id));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing product", description = "Update the details of an existing product")
-    public ResponseEntity<ProductResponseDTO> updateById(@PathVariable Long id,
-                                                         @RequestBody ProductRequestDTO productRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> updateById(
+            @PathVariable Long id,
+            @RequestBody ProductRequestDTO productRequestDTO) {
         return ResponseEntity.ok(productService.updateById(id, productRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a product by ID", description = "Remove a product from the inventory by its unique ID")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById(
+            @PathVariable Long id) {
         productService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
@@ -102,8 +106,9 @@ public class ProductController {
                     @ApiResponse(responseCode = "404", description = "Product not found")
             }
     )
-    public ResponseEntity<ProductResponseDTO> updateProductStatus(@PathVariable Long id,
-                                                                  @RequestBody ProductStatus newStatus) {
+    public ResponseEntity<ProductResponseDTO> updateProductStatus(
+            @PathVariable Long id,
+            @RequestBody ProductStatus newStatus) {
         return ResponseEntity.ok(productService.updateProductStatus(id, newStatus));
     }
 
