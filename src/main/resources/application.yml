@@ -48,4 +48,10 @@ demo-app-spring:
   file:
     upload:
       enable: true
+      enabled: true
+      max-files: 3
+      max-size-per-file: 5242880 # 5MB
+      allowed-mime-type:
+        - image/png
+        - image/jpeg
       base-path: upload/

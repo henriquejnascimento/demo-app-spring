@@ -121,6 +121,7 @@
     </tr>
     <tr>
       <td>Design Pattern - Chain of Responsibility</td>
+      <td><span class="done">✅ Done</span></td>
       <td>❌ Not Started</td>
     </tr>
     <tr>

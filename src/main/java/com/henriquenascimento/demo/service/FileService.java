@@ -1,13 +1,17 @@
 package com.henriquenascimento.demo.service;
 
+import com.henriquenascimento.demo.dto.FileRequestDTO;
 import com.henriquenascimento.demo.dto.FileResponseDTO;
 import com.henriquenascimento.demo.exceptions.FileException;
 import com.henriquenascimento.demo.mapper.FileResponseMapper;
 import com.henriquenascimento.demo.model.File;
 import com.henriquenascimento.demo.properties.FileProperties;
 import com.henriquenascimento.demo.repository.FileRepository;
+import com.henriquenascimento.demo.service.validation.chain.uploadfile.*;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -26,10 +30,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.henriquenascimento.demo.constant.ErrorConstant.buildFileNotFoundErrorMessage;
 
@@ -42,34 +47,14 @@ public class FileService {
     private final FileRepository fileRepository;
     private final FileResponseMapper fileResponseMapper;
 
-    public List<FileResponseDTO> uploadFile(final String path,
-                                            final String description,
-                                            final List<MultipartFile> multipartFiles) {
-        /** TODO
-         File validations:
-         check fileProperties.getEnable()
-         check file null
-         check file size is 0 bytes
-         check allowed file types
-         check limit number of files
-         check limit size per file
-         */
+    public List<FileResponseDTO> fileUpload(final FileRequestDTO fileRequestDTO) {
+        fileUploadValidation(fileRequestDTO);
 
         List<FileResponseDTO> fileResponseDTOList = new ArrayList<>();
-        multipartFiles.forEach(multipartFile -> {
-            if (multipartFile.isEmpty()) {
-                log.error("The file cannot be empty."); // TODO move to validation
-                throw new IllegalArgumentException("The file cannot be empty."); // TODO move to validation
-            }
-
+        fileRequestDTO.getFiles().forEach(multipartFile -> {
             final String fileName = multipartFile.getOriginalFilename();
-            if (ObjectUtils.isEmpty(fileName)) {
-                log.error("The file name cannot be null or empty."); // TODO move to validation
-                throw new FileException("The file name cannot be null or empty."); // TODO move to validation
-            }
-
-            final String basePath = fileProperties.getBasePath();
-            final String fullPath = !ObjectUtils.isEmpty(path) ? Paths.get(basePath, path).toString() : Paths.get(basePath).toString();
+            final String basePath = fileProperties.getBasePath() + UUID.randomUUID();
+            final String fullPath = !ObjectUtils.isEmpty(fileRequestDTO.getPath()) ? Paths.get(basePath, fileRequestDTO.getPath()).toString() : Paths.get(basePath).toString();
             saveFile(fullPath, fileName, multipartFile);
 
             fileResponseDTOList.add(
@@ -81,7 +66,7 @@ public class FileService {
                                             .size(multipartFile.getSize())
                                             .hash(calculateFileHash(multipartFile))
                                             .mimeType(getMimeType(multipartFile))
-                                            .description(description)
+                                            .description(fileRequestDTO.getDescription())
                                             .build())));
         });
         return fileResponseDTOList;
@@ -215,6 +200,16 @@ public class FileService {
         File file = fileRepository.findById(idFileStorage)
                 .orElseThrow(() -> new FileException("File not found with ID: " + idFileStorage));
         return fileResponseMapper.toDTO(file);
+    }
+
+    public void fileUploadValidation(final FileRequestDTO fileRequestDTO) {
+        new UploadFileValidationChain(Arrays.asList(
+                new UploadFileEnabledValidation(fileProperties),
+                new UploadFileAllowedMimeTypeValidation(fileProperties),
+                new UploadFileMaxFilesValidation(fileProperties),
+                new UploadFileMaxSizePerFileValidation(fileProperties),
+                new UploadFileNotEmptyFileValidation()
+        )).validate(fileRequestDTO);
     }
 
 }

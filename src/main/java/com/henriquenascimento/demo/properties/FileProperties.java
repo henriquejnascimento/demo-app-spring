@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Data
 @Configuration
 @NoArgsConstructor
@@ -13,7 +15,10 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("demo-app-spring.file.upload")
 public class FileProperties {
 
-    private Boolean enable;
+    private Boolean enabled;
+    private int maxFiles;
+    private Long maxSizePerFile;
+    private List<String> allowedMimeType;
     private String basePath;
 
 }

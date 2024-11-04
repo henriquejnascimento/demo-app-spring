@@ -1,8 +1,10 @@
 package com.henriquenascimento.demo.controller;
 
+import com.henriquenascimento.demo.dto.FileRequestDTO;
 import com.henriquenascimento.demo.dto.FileResponseDTO;
 import com.henriquenascimento.demo.service.FileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -11,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,11 +28,9 @@ public class FileController {
     private final FileService fileService;
 
     @PostMapping("/upload")
-    public ResponseEntity<List<FileResponseDTO>> uploadFile(
-            @RequestParam(value = "path", required = false) final String path,
-            @RequestParam(value = "description", required = false) final String description,
-            @RequestParam("file") final List<MultipartFile> multipartFiles) {
-        return new ResponseEntity<>(fileService.uploadFile(path, description, multipartFiles), HttpStatus.OK);
+    public ResponseEntity<List<FileResponseDTO>> fileUpload(
+            @Valid final FileRequestDTO fileRequestDTO) {
+        return new ResponseEntity<>(fileService.fileUpload(fileRequestDTO), HttpStatus.OK);
     }
 
     @GetMapping("/download/{idFileStorage}")
