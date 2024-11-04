@@ -34,7 +34,7 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Invalid request")
     })
     public ResponseEntity<ProductResponseDTO> create(
-            @RequestBody @Valid ProductRequestDTO request) {
+            @RequestBody @Valid final ProductRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(request));
     }
 
@@ -72,22 +72,22 @@ public class ProductController {
     @GetMapping("/{id}")
     @Operation(summary = "Retrieve a product by ID", description = "Get the details of a specific product by its unique ID")
     public ResponseEntity<ProductResponseDTO> findById(
-            @PathVariable Long id) {
+            @PathVariable final Long id) {
         return ResponseEntity.ok(productService.findResponseDTOById(id));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing product", description = "Update the details of an existing product")
     public ResponseEntity<ProductResponseDTO> updateById(
-            @PathVariable Long id,
-            @RequestBody ProductRequestDTO productRequestDTO) {
+            @PathVariable final Long id,
+            @RequestBody final ProductRequestDTO productRequestDTO) {
         return ResponseEntity.ok(productService.updateById(id, productRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a product by ID", description = "Remove a product from the inventory by its unique ID")
     public ResponseEntity<Void> deleteById(
-            @PathVariable Long id) {
+            @PathVariable final Long id) {
         productService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
@@ -109,8 +109,8 @@ public class ProductController {
             }
     )
     public ResponseEntity<ProductResponseDTO> updateProductStatus(
-            @PathVariable Long id,
-            @RequestBody ProductStatus newStatus) {
+            @PathVariable final Long id,
+            @RequestBody final ProductStatus newStatus) {
         return ResponseEntity.ok(productService.updateProductStatus(id, newStatus));
     }
 
