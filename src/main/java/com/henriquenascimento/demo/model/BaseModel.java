@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Data
@@ -17,19 +18,19 @@ import java.time.Instant;
 public abstract class BaseModel {
 
     @Column(name = "created_at", updatable = false)
-    private Instant createdAt;
+    private Timestamp createdAt;
 
     @Column(name = "updated_at")
-    private Instant updatedAt;
+    private Timestamp updatedAt;
 
     @PrePersist
     protected void onCreate() {
-        createdAt = Instant.now();
+        createdAt = Timestamp.from(Instant.now());
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = Instant.now();
+        updatedAt = Timestamp.from(Instant.now());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.henriquenascimento.demo.controller;
 
+import com.henriquenascimento.demo.dto.ProductFilterDTO;
 import com.henriquenascimento.demo.dto.ProductRequestDTO;
 import com.henriquenascimento.demo.dto.ProductResponseDTO;
 import com.henriquenascimento.demo.enumerator.ProductStatus;
@@ -61,10 +62,11 @@ public class ProductController {
             }
     )
     public ResponseEntity<Page<ProductResponseDTO>> findAll(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sort", defaultValue = "id,asc") String[] sort) {
-        return ResponseEntity.ok(productService.findAll(page, size, sort));
+            @RequestParam(value = "page", defaultValue = "0") final int page,
+            @RequestParam(value = "size", defaultValue = "10") final int size,
+            @RequestParam(value = "sort", defaultValue = "id,asc") final String[] sort,
+            final ProductFilterDTO productFilterDTO) {
+        return ResponseEntity.ok(productService.findAll(page, size, sort, productFilterDTO));
     }
 
     @GetMapping("/{id}")

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Data
 @SuperBuilder
@@ -13,7 +13,7 @@ import java.time.Instant;
 @AllArgsConstructor
 public class BaseDTO {
 
-    private Instant createdAt;
-    private Instant updatedAt;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
 }

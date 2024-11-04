@@ -2,6 +2,7 @@ package com.henriquenascimento.demo.service;
 
 import com.henriquenascimento.demo.constant.LogMessage;
 import com.henriquenascimento.demo.controller.advice.CustomEntityNotFoundException;
+import com.henriquenascimento.demo.dto.ProductFilterDTO;
 import com.henriquenascimento.demo.dto.ProductRequestDTO;
 import com.henriquenascimento.demo.dto.ProductResponseDTO;
 import com.henriquenascimento.demo.enumerator.ProductStatus;
@@ -43,12 +44,14 @@ public class ProductService {
         return null; // TODO implement
     }
 
-    // TODO add ProductFilterDTO param
     public Page<ProductResponseDTO> findAll(final int page,
                                             final int size,
-                                            final String[] sort) {
+                                            final String[] sort,
+                                            final ProductFilterDTO productFilterDTO) {
         log.info(LogMessage.buildFindAllLogMessage(page, size, String.join(",", sort), productRepository.getEntityName()));
-        return productRepository.findAll(PageRequest.of(page, size, Sort.Direction.fromString(sort[1]), sort[0]))
+        return productRepository.findAllWithFilters(
+                        productFilterDTO,
+                        PageRequest.of(page, size, Sort.Direction.fromString(sort[1]), sort[0]))
                 .map(productResponseMapper::toDTO);
     }
 
