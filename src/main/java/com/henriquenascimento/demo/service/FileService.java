@@ -5,6 +5,7 @@ import com.henriquenascimento.demo.dto.FileResponseDTO;
 import com.henriquenascimento.demo.exceptions.FileException;
 import com.henriquenascimento.demo.mapper.FileResponseMapper;
 import com.henriquenascimento.demo.model.File;
+import com.henriquenascimento.demo.properties.FileExpirationScheduleProperties;
 import com.henriquenascimento.demo.properties.FileProperties;
 import com.henriquenascimento.demo.repository.FileRepository;
 import com.henriquenascimento.demo.service.validation.chain.uploadfile.*;
@@ -46,14 +47,15 @@ public class FileService {
     private final FileProperties fileProperties;
     private final FileRepository fileRepository;
     private final FileResponseMapper fileResponseMapper;
+    private final FileExpirationScheduleProperties fileExpirationScheduleProperties;
 
     public List<FileResponseDTO> fileUpload(final FileRequestDTO fileRequestDTO) {
         fileUploadValidation(fileRequestDTO);
 
         List<FileResponseDTO> fileResponseDTOList = new ArrayList<>();
+        final String basePath = fileProperties.getBasePath() + UUID.randomUUID();
         fileRequestDTO.getFiles().forEach(multipartFile -> {
             final String fileName = multipartFile.getOriginalFilename();
-            final String basePath = fileProperties.getBasePath() + UUID.randomUUID();
             final String fullPath = !ObjectUtils.isEmpty(fileRequestDTO.getPath()) ? Paths.get(basePath, fileRequestDTO.getPath()).toString() : Paths.get(basePath).toString();
             saveFile(fullPath, fileName, multipartFile);
 
@@ -210,6 +212,22 @@ public class FileService {
                 new UploadFileMaxSizePerFileValidation(fileProperties),
                 new UploadFileNotEmptyFileValidation()
         )).validate(fileRequestDTO);
+    }
+
+    public void purgeExpiredFiles() {
+        log.debug("Starting expired files purged...");
+        List<File> filesExpired = fileRepository.findAllByCreatedAtLessThan(Timestamp.from(
+                Instant.now().minus(fileExpirationScheduleProperties.getDays(), ChronoUnit.DAYS)));
+        log.debug("Expired files found: {}", filesExpired.size());
+        AtomicReference<Long> fileCount = new AtomicReference<>((long) 0);
+        filesExpired.forEach(file -> {
+            fileCount.getAndSet(fileCount.get() + 1);
+            log.debug("Deleting file {}/{}: {}", fileCount, filesExpired.size(), file);
+            deleteFile(file.getId());
+            fileRepository.delete(file);
+        });
+        //deleteEmptyDirectories(fileProperties.getBasePath()); // TODO implement
+        log.debug("Expired files purged finished.");
     }
 
 }

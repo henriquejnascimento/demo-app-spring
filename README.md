@@ -100,7 +100,15 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
+      <td>Job Scheduling in Spring Boot</td>
+      <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
       <td>SpEL (Spring Expression Language)</td>
+      <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
+      <td>JPQL</td>
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
@@ -122,6 +130,9 @@
     <tr>
       <td>Design Pattern - Chain of Responsibility</td>
       <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
+      <td>Design Pattern - Factory</td>
       <td>❌ Not Started</td>
     </tr>
     <tr>

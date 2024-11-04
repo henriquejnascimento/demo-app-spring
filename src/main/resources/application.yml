@@ -45,9 +45,11 @@ springdoc:
     path: /swagger-ui.html
 
 demo-app-spring:
+  date-time:
+    zone-id-default: America/Sao_Paulo
+    date-time-format-default: yyyy-MM-dd HH:mm:ss
   file:
     upload:
-      enable: true
       enabled: true
       max-files: 3
       max-size-per-file: 5242880 # 5MB
@@ -55,3 +57,8 @@ demo-app-spring:
         - image/png
         - image/jpeg
       base-path: upload/
+  schedule:
+    upload-file-expiration:
+      enabled: true
+      cron: 0 0 3 * * * # every day at 03:00:00
+      days: 1
