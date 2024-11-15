@@ -1,6 +1,6 @@
 package com.henriquenascimento.demo.service.validation.chain.uploadfile;
 
-import com.henriquenascimento.demo.dto.FileRequestDTO;
+import com.henriquenascimento.demo.dto.UploadFileValidationDTO;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -10,9 +10,9 @@ public class UploadFileValidationChain {
 
     private final List<UploadFileValidation> validations;
 
-    public void validate(final FileRequestDTO fileRequestDTO) {
+    public void validate(final UploadFileValidationDTO uploadFileValidationDTO) {
         for (UploadFileValidation validation : validations) {
-            validation.validate(fileRequestDTO);
+            validation.validate(uploadFileValidationDTO);
         }
     }
 

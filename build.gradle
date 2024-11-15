@@ -66,6 +66,10 @@ dependencies {
 	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
+
+	implementation 'software.amazon.awssdk:sts:2.29.9'
+	implementation 'software.amazon.awssdk:s3:2.29.9'
+
 }
 
 tasks.named('test') {

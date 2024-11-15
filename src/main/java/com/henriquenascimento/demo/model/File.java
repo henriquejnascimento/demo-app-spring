@@ -21,6 +21,10 @@ public class File extends BaseModel implements Serializable {
     @Column(name = "ID_FILE_STORAGE", unique = true, nullable = false)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_FILE_PROCESS")
+    private FileProcess fileProcess;
+
     @Column(name = "FILE_PATH")
     private String path;
 

@@ -4,6 +4,16 @@ spring:
     username: DEV_DEMO
     password: DEV_DEMO
 
+cloud:
+  aws:
+    region: us-east-1
+    credentials:
+      access-key: YOUR-ACCESS-KEY
+      secret-key: YOUR-SECRET-KEY
+    s3:
+      bucket-name: demo-app-bucket
+      acl_default: private
+
 management:
   info:
     java.enabled: true

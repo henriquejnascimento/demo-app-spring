@@ -16,6 +16,8 @@ public class FileResponseDTO extends BaseDTO {
     private Long id;
     private String path;
     private String fileName;
+    private String fullPathFile;
+    private String fileS3Url;
     private Long size;
     private String hash;
     private String mimeType;
