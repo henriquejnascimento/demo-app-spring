@@ -46,8 +46,9 @@ springdoc:
 
 demo-app-spring:
   date-time:
-    zone-id-default: America/Sao_Paulo
-    date-time-format-default: yyyy-MM-dd HH:mm:ss
+    zone-id: America/Sao_Paulo
+    date-format: yyyy-MM-dd
+    date-time-format: yyyy-MM-dd HH:mm:ss
   file:
     upload:
       enabled: true
