@@ -176,8 +176,8 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
-      <td>AWS S3</td>
-      <td>❌ Not Started</td>
+      <td>AWS S3 (Upload file, Download file, List all files, Rename or move file and Delete file)</td>
+      <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
       <td>LocalStack (AWS)</td>
