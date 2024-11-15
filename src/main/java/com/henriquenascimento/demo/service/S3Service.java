@@ -68,7 +68,7 @@ public class S3Service {
 
             fileProcessResponseDTO.setFilesFound((long) fileProcessRequestDTO.getFiles().size());
             fileProcessResponseDTO.setFilesSent(0L);
-            // TODO refactory foreach
+
             for (MultipartFile multipartFile : fileProcessRequestDTO.getFiles()) {
                 String fileName = UUID.randomUUID() + FILE_NAME_SEPARATOR + multipartFile.getOriginalFilename();
                 Path tempFilePath = Files.createTempFile(TEMP_FILE_PREFIX, fileName);
@@ -153,16 +153,18 @@ public class S3Service {
                 .toList();
     }
 
-    public void deleteFile(final String path, final String fileName) {
+    public void deleteFile(final String BucketNameRequest, final String path, final String fileName) {
         try {
+            final String bucketName = s3Utils.getBucketName(BucketNameRequest);
             final String key = s3Utils.getKey(path, fileName);
+
             s3Client.headObject(HeadObjectRequest.builder()
-                    .bucket(awsProperties.getS3().getBucketName())
+                    .bucket(bucketName)
                     .key(key)
                     .build());
 
             s3Client.deleteObject(DeleteObjectRequest.builder()
-                    .bucket(awsProperties.getS3().getBucketName())
+                    .bucket(bucketName)
                     .key(key)
                     .build());
         } catch (NoSuchKeyException e) {
@@ -171,7 +173,7 @@ public class S3Service {
         }
     }
 
-    public void renameFile(
+    public void renameOrMoveFile(
             final String currentBucketName,
             final String newBucketName,
             final String currentFileName,
@@ -179,14 +181,16 @@ public class S3Service {
             final String currentPath,
             final String newPath) {
         try {
+            final String sourceBucketName = s3Utils.getBucketName(currentBucketName);
+
             s3Client.copyObject(CopyObjectRequest.builder()
-                    .sourceBucket(s3Utils.getBucketName(currentBucketName))
+                    .sourceBucket(sourceBucketName)
                     .sourceKey(s3Utils.getKey(currentPath, currentFileName))
                     .destinationBucket(s3Utils.getBucketName(newBucketName))
                     .destinationKey(s3Utils.getKey(newPath, newFileName))
                     .build());
 
-            deleteFile(currentPath, currentFileName);
+            deleteFile(sourceBucketName, currentPath, currentFileName);
         } catch (Exception e) {
             log.error("Error renaming file: {}", e.getMessage(), e);
             throw new FileException("Error renaming file: " + e.getMessage(), e);

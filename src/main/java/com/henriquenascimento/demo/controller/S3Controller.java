@@ -46,23 +46,24 @@ public class S3Controller {
         return ResponseEntity.ok(files);
     }
 
-    @PutMapping("/rename-file")
-    public ResponseEntity<String> renameFile(
+    @PutMapping("/rename-or-move-file")
+    public ResponseEntity<String> renameOrMoveFile(
             @RequestParam(value = "currentBucketName", required = false) final String currentBucketName,
             @RequestParam(value = "newBucketName", required = false) final String newBucketName,
             @RequestParam(value = "currentFileName") final String currentFileName,
             @RequestParam(value = "newFileName") final String newFileName,
             @RequestParam(value = "currentPath", required = false) final String currentPath,
             @RequestParam(value = "newPath", required = false) final String newPath) {
-        s3Service.renameFile(currentBucketName, newBucketName, currentFileName, newFileName, currentPath, newPath);
+        s3Service.renameOrMoveFile(currentBucketName, newBucketName, currentFileName, newFileName, currentPath, newPath);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete-file/{fileName}")
     public ResponseEntity<String> deleteFile(
             @PathVariable final String fileName,
+            @RequestParam(value = "bucketName", required = false) final String bucketName,
             @RequestParam(value = "path", required = false) final String path) {
-        s3Service.deleteFile(path, fileName);
+        s3Service.deleteFile(bucketName, path, fileName);
         return ResponseEntity.noContent().build();
     }
 
