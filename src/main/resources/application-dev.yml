@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:oracle:thin:@localhost:1521/DEV_DEMO_APP_SPRING
-    username: DEV_DEMO
-    password: DEV_DEMO
+    username: dev_demo
+    password: dev_demo
 
 cloud:
   aws:

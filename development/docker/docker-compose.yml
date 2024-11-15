@@ -3,12 +3,12 @@ version: '3.9'
 services:
   oracle:
     image: gvenzl/oracle-xe:21-slim
-    container_name: demo-application-spring-oracle
+    container_name: demo-app-spring-oracle
     environment:
       ORACLE_PASSWORD: root
       ORACLE_DATABASE: DEV_DEMO_APP_SPRING
-      APP_USER: DEV_DEMO
-      APP_USER_PASSWORD: DEV_DEMO
+      APP_USER: dev_demo
+      APP_USER_PASSWORD: dev_demo
       ORACLE_CHARACTERSET: AL32UTF8
     ports:    
       - 1521:1521
