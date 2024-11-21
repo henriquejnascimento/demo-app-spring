@@ -15,6 +15,8 @@
 
  - Java 21
  - Docker
+- Java 21
+- Docker
 
 ### Links
 
@@ -65,6 +67,10 @@
     </tr>
     <tr>
       <td>Spring Boot Actuator</td>
+      <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
+      <td>Spring Boot Starter Validation</td>
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
@@ -133,7 +139,7 @@
     </tr>
     <tr>
       <td>Design Pattern - Factory</td>
-      <td>❌ Not Started</td>
+      <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
       <td>Swagger API Docs / OpenAPI</td>
@@ -164,6 +170,14 @@
       <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
+      <td>MapStruct</td>
+      <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
+      <td>Lombok</td>
+      <td><span class="done">✅ Done</span></td>
+    </tr>
+    <tr>
       <td>AWS EC2</td>
       <td>❌ Not Started</td>
     </tr>
@@ -173,7 +187,7 @@
     </tr>
     <tr>
       <td>AWS SQS</td>
-      <td>❌ Not Started</td>
+      <td><span class="done">✅ Done</span></td>
     </tr>
     <tr>
       <td>AWS S3 (Upload file, Download file, List all files, Rename or move file and Delete file)</td>
@@ -188,11 +202,7 @@
       <td>❌ Not Started</td>
     </tr>
     <tr>
-      <td>SFTP Upload</td>
-      <td>❌ Not Started</td>
-    </tr>
-    <tr>
-      <td>SFTP Download</td>
+      <td>Manage SFTP (Upload, Download, List, rename and delete with Spring Integration)</td>
       <td>❌ Not Started</td>
     </tr>
     <tr>

@@ -38,6 +38,14 @@ spring:
     ansi:
       enabled: always
 
+sqs:
+  message-visibility-seconds: 30
+  max-concurrent-messages: 50
+  poll-timeout-seconds: 3
+  max-messages-per-poll: 10
+  message-retries: 3
+  ttl: 5000
+
 springdoc:
   api-docs:
     path: /api-docs
