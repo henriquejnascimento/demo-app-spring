@@ -13,8 +13,6 @@
 
 ### Requirements
 
- - Java 21
- - Docker
 - Java 21
 - Docker
 
