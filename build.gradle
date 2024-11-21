@@ -25,6 +25,8 @@ repositories {
 }
 
 ext {
+	springCloudVersion = '2023.0.2'
+	springCloudAWSVersion = '3.1.1'
 	mapstructVersion = "1.6.0"
 	flywayVersion = '10.20.0'
 	ojdbcVersion = '23.5.0.24.07'
@@ -66,10 +68,18 @@ dependencies {
 	testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3'
+	implementation 'software.amazon.awssdk:sts'
 
 	implementation 'software.amazon.awssdk:sts:2.29.9'
 	implementation 'software.amazon.awssdk:s3:2.29.9'
 
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom "io.awspring.cloud:spring-cloud-aws-dependencies:${springCloudAWSVersion}"
+
+	}
 }
 
 tasks.named('test') {

@@ -1,11 +1,9 @@
 package com.henriquenascimento.demo.configuration;
 
-import com.henriquenascimento.demo.properties.AWSProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 
@@ -13,18 +11,17 @@ import software.amazon.awssdk.services.s3.S3Client;
 @RequiredArgsConstructor
 public class S3Config {
 
-    private final AWSProperties awsProperties;
+    private final AwsConfig awsConfig;
 
     @Bean
     public S3Client s3Client() {
-        AwsBasicCredentials awsCredentials = AwsBasicCredentials.create(
-                awsProperties.getCredentials().getAccessKey(),
-                awsProperties.getCredentials().getSecretKey()
-        );
-
         return S3Client.builder()
-                .region(Region.of(awsProperties.getRegion()))
-                .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
+                .region(Region.of(awsConfig.getRegion()))
+                .credentialsProvider(ProfileCredentialsProvider.builder()
+                        .profileName(awsConfig.getActiveProfile())
+                        .build())
                 .build();
     }
+
+
 }

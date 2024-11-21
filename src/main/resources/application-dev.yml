@@ -6,12 +6,8 @@ spring:
 
 cloud:
   aws:
-    region: us-east-1
-    credentials:
-      access-key: YOUR-ACCESS-KEY
-      secret-key: YOUR-SECRET-KEY
     s3:
-      bucket-name: demo-app-bucket
+      bucket-name: demo-app-bucket-90
       acl_default: private
 
 management:

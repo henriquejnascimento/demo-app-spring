@@ -13,15 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties("cloud.aws")
 public class AWSProperties {
 
-    private String region;
-    private Credentials credentials;
     private S3 s3;
-
-    @Data
-    public static class Credentials {
-        private String accessKey;
-        private String secretKey;
-    }
 
     @Data
     public static class S3 {
